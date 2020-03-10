@@ -1,0 +1,19 @@
+.application-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-query {
+    display: flex;
+    justify-content: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.search-map {
+    height: 100%;
+    position: relative;
+}

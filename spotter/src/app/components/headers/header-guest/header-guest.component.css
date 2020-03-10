@@ -1,54 +1,94 @@
+.navbar-holder {
+    width: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:  rgb(26, 26, 26);
+}
+
 .navbar-guest-container {
-    width: 100%;
-    height: 75px;
+    width: 870px;
+    height: 65px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
-    background: #fefefe;
-    border-bottom: 1px solid rgb(221, 221, 221);
 }
 
 .logo-container, .navbar-tabs-container {
     width: 50%;
-    height: 75px;
+    height: 65px;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
+.icon {
+    height: 65px;
+}
+
 .logo-container {
     justify-content: flex-start;
+    background: transparent;
 }
 
 .navbar-tabs-container {
     justify-content: flex-end;
 }
 
-.logo {
+.logo-header {
+    color: rgb(231, 49, 49);
+    font-size: 2rem;
     margin-left: .5rem;
-    height: 36px;
+}
+
+.logo {
     width: 36px;
-    background-image: url(../../../../assets/NYC/nyc-mobile.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    height: 36px;
 }
 
 .navbar-link-container {
-    margin: .25rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 60px;
+    margin: .5rem;
+    border-bottom: 1px solid transparent;
+}
+
+.navbar-link-container:hover {
+    border-bottom: 1px solid white;
 }
 
 .navbar-link-guest {
-    padding-left: .5rem;
-    padding-right: .5rem;
     cursor: pointer;
     text-decoration: none;
-    color: black;
-    font-size: 1rem;
+    color: white;
+    font-size: .9rem;
     text-align: center;
+    font-weight: 500;
+}
+
+.signup-link {
+    height: 45px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: .5rem;
+}
+
+#signup {
+    background: #FF5252;
+    color: white;
+    font-size: .9rem;
+    padding: .5rem;
+    padding-left: .7rem;
+    padding-right: .7rem;
+}
+
+.profile-container {
+    width: 36px;
+    height: 36px;
+    border-radius: 50px;
 }

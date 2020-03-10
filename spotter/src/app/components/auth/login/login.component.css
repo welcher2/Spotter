@@ -1,0 +1,108 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: rgba(156, 156, 156, 0.349);
+    padding: 2rem;
+}
+
+.login-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    height: 600px;
+    box-shadow: 0px 0px 15px 8px rgba(47, 47, 47, 0.301);
+    border-radius: 10px;
+    background: white;
+    position: relative;
+}
+
+.exit {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 30px;
+    height: 30px;
+    background-image: url(../../../../assets/SVGs/exit-icon.svg);
+    background-size: contain;
+    background-position: center;
+    cursor: pointer;
+}
+
+.city-svg {
+    background-image: url(../../../../assets/SVGs/undraw_town_r6pc.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 220px;
+    width: 240px;
+}
+
+.login-native {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    padding-bottom: 0;
+}
+
+.header {
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header > h2 {
+    font-size: 1.1rem;
+    color: #6C63FF;
+}
+
+.line {
+    width: 90%;
+    height: 1px;
+    border: 1px solid rgba(209, 209, 209, 0.342);
+}
+
+.login-input {
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.login-input > input {
+    width: 100%;
+    margin-top: 1rem;
+    height: 40px;
+    border: 1px solid #FF5252;
+    border-radius: 20px;
+    padding-left: 1rem;
+    outline: none;
+}
+
+textarea {
+    color: white;
+}
+
+.login-btn {
+    padding: .3rem;
+    padding-left: .55rem;
+    padding-right: .55rem;
+    width: 80%;
+    height: 40px;
+    margin: 1rem;
+    border-radius: 20px;
+    border: none;
+    font-size: 1rem;
+    background: linear-gradient(to right, #FF5252, rgb(209, 1, 105));
+    color: white;
+    outline: none;
+    cursor: pointer;
+}

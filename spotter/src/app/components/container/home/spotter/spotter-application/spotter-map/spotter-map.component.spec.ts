@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpotterResultsListComponent } from './spotter-results-list.component';
+import { SpotterMapComponent } from './spotter-map.component';
 
-describe('SpotterResultsListComponent', () => {
-  let component: SpotterResultsListComponent;
-  let fixture: ComponentFixture<SpotterResultsListComponent>;
+describe('SpotterMapComponent', () => {
+  let component: SpotterMapComponent;
+  let fixture: ComponentFixture<SpotterMapComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpotterResultsListComponent ]
+      declarations: [ SpotterMapComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpotterResultsListComponent);
+    fixture = TestBed.createComponent(SpotterMapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

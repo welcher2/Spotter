@@ -1,0 +1,20 @@
+.overview-container {
+    width: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.svg {
+    width: 80px;
+    height: 80px;
+}
+
+.seattle {
+    background-image: url(../../../../../assets/SVGs/locations/seattle.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: translateX()
+}

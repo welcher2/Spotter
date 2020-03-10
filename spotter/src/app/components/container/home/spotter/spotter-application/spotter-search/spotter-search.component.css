@@ -1,0 +1,81 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.form {
+    width: 100%;
+    height: 15%;
+}
+
+.location-searchbar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.location-searchbar > h1 {
+    color: black;
+    font-size: 1.7rem;
+    margin: .5rem;
+}
+
+#location-input {
+    height: 50px;
+    border: 1px solid black;
+    font-size: 1.2rem;
+    padding: .5rem;
+    margin: .5rem;
+    cursor: pointer;
+    caret-color: black;
+    outline: none;
+}
+
+.duration {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.input-holder {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin: 1rem;
+    background: transparent;
+}
+
+.search-button {
+    font-size: 1.2rem;
+    padding: .5rem;
+    color: rgb(224, 224, 224);
+    background: rgb(12, 12, 12);
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.label {
+    font-size: 1.2rem;
+    color: black;
+    margin-left: .5rem;
+}
+
+input {
+    cursor: pointer;
+}
+
+.button-holder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

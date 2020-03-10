@@ -1,20 +1,37 @@
-<div class="navbar-guest-container">
-    <div class="logo-container">
-        <div class="logo"></div>
-        <h1 class="name">Spotter</h1>
-    </div>
-    <div class="navbar-tabs-container">
-        <div class="navbar-link-container">
-            <a [routerLink]="" class="navbar-link-guest">Discover a spot</a>
+<div class="navbar-holder">
+    <div class="navbar-guest-container">
+        <div class="logo-container">
+            <img src="../../../../assets/SVGs/logos/tilted-logo-white.svg" class="logo" alt="Spotter Logo">
+            <h1 style="color: #ff5252; font-size: 1.2rem; margin-left: .5rem;">Spotter</h1>
         </div>
-        <div class="navbar-link-container">
-            <a [routerLink]="" class="navbar-link-guest">How to host</a>
+        <div *ngIf="user | async as user; else guestLogin" class="navbar-logged-in">
+            <div class="navbar-tabs-container">
+                <div class="navbar-link-container">
+                    <div class="profile-container">
+                        <div class="profile-pic">
+                        </div>
+                        <div class="profile-dropdown">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="navbar-link-container">
-            <a [routerLink]="" class="navbar-link-guest">Sign up</a>
-        </div>
-        <div class="navbar-link-container">
-            <a [routerLink]="" class="navbar-link-guest">Log in</a>
-        </div>
+        <ng-template #guestLogin>
+            <div class="navbar-tabs-container">
+                <div class="navbar-link-container">
+                    <a class="navbar-link-guest">How to host</a>
+                </div>
+                <div class="navbar-link-container">
+                    <a class="navbar-link-guest" (click)="login()">
+                        <span class="icon">
+                            <fa-icon [icon]="faUser" [styles]="{'color': '#fefefe', 'cursor': 'pointer'}"></fa-icon>
+                        </span>Log in</a>
+                </div>
+                <div class="signup-link">
+                    <a id="signup">Sign up</a>
+                </div>
+            </div>
+        </ng-template>
     </div>
 </div>

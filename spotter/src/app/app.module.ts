@@ -1,17 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './Modules/shared.module';
+import { FirebaseModule } from './Modules/Firebase/firebase.module';
+
 import { AppComponent } from './app.component';
 import { HeaderGuestComponent } from './components/headers/header-guest/header-guest.component';
 import { MainHeaderComponent } from './components/headers/main-header/main-header.component';
 import { HeaderCommunityMemberComponent } from './components/headers/header-community-member/header-community-member.component';
 import { HomeComponent } from './components/container/home/home/home.component';
 import { SpotterComponent } from './components/container/home/spotter/spotter.component';
-import { SpotterResultsListComponent } from './components/container/home/spotter/spotter-results-list/spotter-results-list.component';
-import { SpotterResultsMapComponent } from './components/container/home/spotter/spotter-results-map/spotter-results-map.component';
-import { SpotterSearchParamsComponent } from './components/container/home/spotter/spotter-search-params/spotter-search-params.component';
 import { ContainerComponent } from './components/container/home/container/container.component';
+import { SpotterApplicationComponent } from './components/container/home/spotter/spotter-application/spotter-application/spotter-application.component';
+import { SpotterMapComponent } from './components/container/home/spotter/spotter-application/spotter-map/spotter-map.component';
+import { SpotterListComponent } from './components/container/home/spotter/spotter-application/spotter-search/spotter-list/spotter-list.component';
+import { SpotterSearchComponent } from './components/container/home/spotter/spotter-application/spotter-search/spotter-search.component';
+import { LoginComponent } from './components/auth/login/login.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +25,18 @@ import { ContainerComponent } from './components/container/home/container/contai
     HeaderCommunityMemberComponent,
     HomeComponent,
     SpotterComponent,
-    SpotterResultsListComponent,
-    SpotterResultsMapComponent,
-    SpotterSearchParamsComponent,
     ContainerComponent,
+    SpotterApplicationComponent,
+    SpotterMapComponent,
+    SpotterSearchComponent,
+    SpotterListComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule,
+    FirebaseModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,22 @@
+<div class="container">
+    <form class="form" [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm)">
+        <div class="location-searchbar">
+            <h1>Where</h1>
+            <input type="text" id="location-input" placeholder="Boone, NC">
+        </div>
+        <div class="duration">
+            <div class="input-holder">
+                <input type="checkbox" id="short" name="short-term" formControlName="shortTerm">
+                <div class="label">Short term</div>
+            </div>
+            <div class="input-holder">
+                <input type="checkbox" id="long" name="long-term" formControlName="longTerm">
+                <div class="label">Long term</div>
+            </div>
+        </div>
+        <div class="button-holder">
+            <button class="search-button" type="submit">Locate spot</button>
+        </div>
+    </form>
+    <app-spotter-list></app-spotter-list>
+</div>

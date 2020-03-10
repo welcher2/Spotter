@@ -1,4 +1,83 @@
-<div class="home-container">
-    <app-introduction></app-introduction>
-    <app-spotter></app-spotter>
+<div class="home-holder">
+    <div class="home-container">
+        <div class="preview-container">
+            <div class="vehicle-container">
+                <div class="type active" id="car">
+                    <a class="preview-tab" [routerLink]="[]">
+                        <span class="icon">
+                            <fa-icon [icon]="faCar" [styles]="{'color': '#FF5252'}"></fa-icon>
+                        </span>
+                        <h1>Car</h1>
+                    </a>
+                </div>
+                <div class="type" id="camper">
+                    <a class="preview-tab" [routerLink]="[]">
+                        <span class="icon">
+                            <fa-icon [icon]="faCaravan" [styles]="{'color': '#FF5252'}"></fa-icon>
+                        </span>
+                        <h1>Camper</h1>
+                    </a>
+                </div>
+                <div class="type" id="semi">
+                    <a class="preview-tab" [routerLink]="[]">
+                        <span class="icon">
+                            <fa-icon [icon]="faTruck" [styles]="{'color': '#FF5252'}"></fa-icon>
+                        </span>
+                        <h1>Semi</h1>
+                    </a>
+                </div>
+                <div class="type" id="bike">
+                    <a class="preview-tab" [routerLink]="[]">
+                        <span class="icon">
+                            <fa-icon [icon]="faMotorcycle" [styles]="{'color': '#FF5252'}"></fa-icon>
+                        </span>
+                        <h1>Motorcycle</h1>
+                    </a>
+                </div>
+            </div>
+    
+            <div class="results-map">
+                <div class="results-search">
+                    <div class="search">
+                        <div class="location">
+                            <div class="search-box">
+                                <input type="text" class="location-input" placeholder="Boone, NC">
+                                <div id="icon">
+                                    <img id="location-icon" src="../../../../../assets/SVGs/arrow.svg" alt="Location"
+                                        width="14px">
+                                </div>
+                            </div>
+                            <div class="duration">
+                                <div class="duration-holder">
+                                    <div class="length">
+                                        Hourly
+                                    </div>
+                                    <div class="length">
+                                        Daily
+                                    </div>
+                                    <div class="length">
+                                        Week+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="submit-container">
+                                <button class="locate">Locate spot</button>
+                            </div>
+                        </div>
+                        <div class="results-header-container">
+                            <h1 id="results-header">Results</h1>
+                        </div>
+                    </div>
+                    <div class="results">
+                        <p>No results</p>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <div class="map-frame">
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
