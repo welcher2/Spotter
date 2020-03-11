@@ -5,9 +5,6 @@ import { SharedModule } from './Modules/shared.module';
 import { FirebaseModule } from './Modules/Firebase/firebase.module';
 
 import { AppComponent } from './app.component';
-import { HeaderGuestComponent } from './components/headers/header-guest/header-guest.component';
-import { MainHeaderComponent } from './components/headers/main-header/main-header.component';
-import { HeaderCommunityMemberComponent } from './components/headers/header-community-member/header-community-member.component';
 import { HomeComponent } from './components/container/home/home/home.component';
 import { SpotterComponent } from './components/container/home/spotter/spotter.component';
 import { ContainerComponent } from './components/container/home/container/container.component';
@@ -16,13 +13,11 @@ import { SpotterMapComponent } from './components/container/home/spotter/spotter
 import { SpotterListComponent } from './components/container/home/spotter/spotter-application/spotter-search/spotter-list/spotter-list.component';
 import { SpotterSearchComponent } from './components/container/home/spotter/spotter-application/spotter-search/spotter-search.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderGuestComponent,
-    MainHeaderComponent,
-    HeaderCommunityMemberComponent,
     HomeComponent,
     SpotterComponent,
     ContainerComponent,
@@ -31,6 +26,7 @@ import { LoginComponent } from './components/auth/login/login.component';
     SpotterSearchComponent,
     SpotterListComponent,
     LoginComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

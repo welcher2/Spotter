@@ -88,7 +88,29 @@
 }
 
 .profile-container {
-    width: 36px;
-    height: 36px;
-    border-radius: 50px;
+    width: 50%;
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.profile-icon {
+    font-size: 32px;
+}
+
+.profile-info {
+    display: flex;
+    height: 48px;
+    margin: .25rem;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.line {
+    height: 1px;
+    width: 90%;
+    margin: auto;
+    border: .5px solid rgba(211, 211, 211, 0.472);
 }

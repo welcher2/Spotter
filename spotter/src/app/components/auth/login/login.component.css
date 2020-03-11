@@ -4,7 +4,12 @@
     align-items: center;
     width: 100%;
     background: rgba(156, 156, 156, 0.349);
-    padding: 2rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
 }
 
 .login-section {
@@ -105,4 +110,58 @@ textarea {
     color: white;
     outline: none;
     cursor: pointer;
+}
+
+.invalid-email {
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.login-fail {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.login-error-message {
+    color: #001f3f;
+    font-size: .9rem;
+}
+
+.google-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #6C63FF;
+    width: 60%;
+    border-radius: 5px;
+    height: 40px;
+    margin: 1rem;
+    cursor: pointer;
+}
+
+.google-login > * {
+    cursor: pointer;
+}
+
+.google-icon {
+    background-image: url(../../../../assets/SVGs/logos/Google__G__Logo.svg);
+    height: 25px;
+    width: 25px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.google-login-button {
+    height: 40px;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 550;
+    color: rgb(255, 255, 255);
+    outline: none;
 }

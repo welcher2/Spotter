@@ -1,0 +1,51 @@
+<div class="navbar-holder">
+    <div class="navbar-guest-container">
+        <div class="logo-container">
+            <img src="../../../../assets/SVGs/logos/tilted-logo-white.svg" class="logo" alt="Spotter Logo">
+            <h1 style="color: #ff5252; font-size: 1.2rem; margin-left: .5rem;">Spotter</h1>
+        </div>
+        <div *ngIf="loggedIn; else guestLogin" class="navbar-tabs-container">
+            <div [ngClass]="{'dropdown': true, 'is-right': true, 'is-active': dropdownSelected}">
+                <div class="dropdown-trigger" (click)="dropdownSelected = !dropdownSelected">
+                    <div class="profile-container">
+                        <span class="profile-icon">
+                            <fa-icon [icon]="faUserCircle" [styles]="{ 'cursor': 'pointer', 'color': 'white'}">
+                            </fa-icon>
+                        </span>
+                        <div class="profile-info">
+                            <fa-icon [icon]="faAngleDown" [styles]="{ 'cursor': 'pointer', 'color': 'white'}"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-menu" style="z-index: 100000;">
+                    <div class="dropdown-content">
+                        <a class="dropdown-item" routerLink="/profile/settings">Profile</a>
+                        <a class="dropdown-item" routerLink="">Account</a>
+                        <div class="line"></div>
+                        <a class="dropdown-item" routerLink="">My Spots</a>
+                        <a class="dropdown-item" routerLink="">Host a Spot</a>
+                        <div class="line"></div>
+                        <a class="dropdown-item" routerLink="">Help</a>
+                        <a class="dropdown-item" (click)="logout()">Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #guestLogin>
+            <div class="navbar-tabs-container">
+                <div class="navbar-link-container">
+                    <a class="navbar-link-guest">How to host</a>
+                </div>
+                <div class="navbar-link-container">
+                    <a class="navbar-link-guest" routerLink="/login">
+                        <span class="icon">
+                            <fa-icon [icon]="faUser" [styles]="{'color': '#fefefe', 'cursor': 'pointer'}"></fa-icon>
+                        </span>Log in</a>
+                </div>
+                <div class="signup-link">
+                    <a id="signup" routerLink="/register">Sign up</a>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

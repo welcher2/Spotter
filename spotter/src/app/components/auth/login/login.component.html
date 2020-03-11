@@ -1,6 +1,6 @@
 <div class="login-container">
     <div class="login-section">
-        <div class="exit">
+        <div class="exit" routerLink="" (click)="exitted = true">
         </div>
         <div class="city-svg"></div>
         <h1>Already signed up for Spotter?</h1>
@@ -8,22 +8,26 @@
             <h2>Login</h2>
         </div>
         <div class="line"></div>
-        <div class="login-native">
-            <div class="login-input">
-                <input type="text" name="email" id="emailLogin" placeholder="Email">
+        <form [formGroup]="loginForm" class="login-native" (ngSubmit)="loginEmailPasswordAuth()" autocomplete="off">
+            <div class="login-input" [ngClass]="{ 'has-error': isSubmitted && formControls.email.errors }">
+                <input type="text" id="emailLogin" placeholder="Email" formControlName="email">
             </div>
-            <div class="login-input">
-                <input type="password" name="password" id="passwordLogin" placeholder="Password">
+            <div class="login-input" [ngClass]="{ 'has-error': isSubmitted && formControls.password.errors }">
+                <input type="password"  id="passwordLogin" placeholder="Password" formControlName="password">
             </div>
-            <button class="login-btn" (click)="loginEmailPasswordAuth()">Continue</button>
-        </div>
+            <div *ngIf="(isSubmitted && (formControls.email.errors || formControls.password.errors)) || error" class="invalid-email">
+                <p style="color: #001f3f; font-size: .9rem; margin-top: .25rem;">Error: Please make sure your email and password are correct.</p>
+            </div>
+            <button class="login-btn" type="submit">Continue</button>
+        </form>
         <div class="line"></div>
         <div style="width: 90%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <a routerLink="" style="color: #6C63FF; margin: .5rem;">Register</a>
             <p>or</p>
         </div>
-        <div class="login-provider">
-        
+        <div class="google-login" (click)="googleSignIn()">
+            <div class="google-icon"></div>
+            <button class="google-login-button">Sign in with Google</button>
         </div>
     </div>
 </div>
