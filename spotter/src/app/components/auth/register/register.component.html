@@ -6,85 +6,83 @@
         <h1>Create your account</h1>
         <form style="width: 100%; height: 100%;" [formGroup]="registerForm" #ngForm="ngForm" (ngSubmit)="verifyPhone()">
             <div class="form-container">
-                <div class="name-container">
-                    <div class="field">
-                        <label class="label">First Name</label>
-                        <div class="control">
-                            <input id="firstNameInput" type="text" class="input" placeholder="Alexander" formControlName="firstName">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">Last Name</label>
-                        <div class="control">
-                            <input type="text" class="input" placeholder="Smith" formControlName="lastName">
-                        </div>
+
+                <div class="field">
+                    <label class="label">First Name</label>
+                    <div class="control">
+                        <input id="firstNameInput" type="text" class="input" placeholder="Alexander" formControlName="firstName">
                     </div>
                 </div>
-            </div>
-            <div class="preferred-container">
+
+                <div class="field">
+                    <label class="label">Last Name</label>
+                    <div class="control">
+                        <input type="text" class="input" placeholder="Smith" formControlName="lastName">
+                    </div>
+                </div>
+
                 <div class="field">
                     <label class="label">Preferred Name</label>
                     <div class="control">
                         <input type="text" class="input" placeholder="Alex" formControlName="preferredName">
                     </div>
                 </div>
-            </div>
-            <div class="dob-phone">
+
                 <div class="field">
                     <label class="label">Date of Birth</label>
                     <div class="control">
                         <input type="text" class="input" placeholder="mm/dd/yyyy" formControlName="dateOfBirth" appDob>
                     </div>
                 </div>
+
                 <div class="field">
                     <label class="label">Phone Number</label>
                     <div class="control">
                         <input type="text" type="tel" class="input" placeholder="(xxx) xxx-xxxx" telephone-input-mask formControlName="phoneNumber">
                     </div>
                 </div>
-            </div>
-            <div class="email-container">
-                <div class="field">
-                    <label for="" class="label">Email</label>
-                    <div class="control has-icons-left">
-                        <input type="text" class="input" formControlName="email">
-                        <span class="icon is-small is-left">
-                            <fa-icon [icon]="faUser"></fa-icon>
-                        </span>
+
+                <div class="email-password-container">
+                    <div class="field">
+                        <label for="" class="label">Email</label>
+                        <div class="control has-icons-left">
+                            <input type="text" class="input" formControlName="email">
+                            <span class="icon is-small is-left">
+                                <fa-icon [icon]="faUser"></fa-icon>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label for="" class="label">Confirm Email</label>
+                        <div class="control">
+                            <input type="text" class="input" formControlName="confirmEmail">
+                        </div>
+                    </div>
+                    <div class="alert">
+                        Emails must match.
+                    </div>
+                    <div class="field">
+                        <label for="" class="label">Password</label>
+                        <div class="control has-icons-left">
+                            <input type="text" class="input" formControlName="password">
+                            <span class="icon is-small is-left">
+                                <fa-icon [icon]="faLock"></fa-icon>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label for="" class="label">Confirm Password</label>
+                        <div class="control">
+                            <input type="text" class="input" formControlName="confirmPassword">
+                        </div>
                     </div>
                 </div>
-                <div class="field">
-                    <label for="" class="label">Confirm Email</label>
-                    <div class="control">
-                        <input type="text" class="input" formControlName="confirmEmail">
-                    </div>
-                    <div *ngIf="ngForm.submitted && !registerForm.get('confirmEmail').valid" class="alert">
-                        Emails do not match.
-                    </div>
+
+                <div class="button-container">
+                    <button type="submit" class="button">Continue</button>
                 </div>
-            </div>
-            <div class="password-container">
-                <div class="field">
-                    <label for="" class="label">Password</label>
-                    <div class="control has-icons-left">
-                        <input type="text" class="input" formControlName="password">
-                        <span class="icon is-small is-left">
-                            <fa-icon [icon]="faLock"></fa-icon>
-                        </span>
-                    </div>
-                </div>
-                <div class="field">
-                    <label for="" class="label">Confirm Password</label>
-                    <div class="control">
-                        <input type="text" class="input" formControlName="confirmPassword">
-                    </div>
-                </div>
-            </div>
-            <div *ngIf="registerForm.get('confirmPassword').errors.matchOtherValidator && ngForm.submitted" class="alert">
-                Passwords do not match.
-            </div>
-            <div class="button-container">
-                <button type="submit" class="button">Continue</button>
             </div>
         </form>
     </div>

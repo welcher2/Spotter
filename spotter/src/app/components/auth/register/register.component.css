@@ -32,28 +32,28 @@ h1 {
 
 .form-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     align-items: flex-start;
     width: 100%;
 }
 
-.name-container {
+.email-password-container {
+    width: 100%;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
-    width: 100%;
+    align-items: flex-start;
+    flex-wrap: wrap;
 }
 
-.preferred-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 50%;
+.alert {
+    width: 100%;
+    margin: .25rem;
+    color: red;
 }
 
 .field{
-    width: 100%;
+    width: 45%;
     margin: .5rem;
 }
 
@@ -68,27 +68,6 @@ input {
 
 .input {
     border: 1px solid rgb(116, 116, 116);
-}
-
-.email-container {
-    display: flex;
-    width: 100%;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.password-container {
-    display: flex;
-    width: 100%;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.dob-phone {
-    display: flex;
-    width: 100%;
-    justify-content: flex-start;
-    align-items: center;
 }
 
 .account-creation-svg {
