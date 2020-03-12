@@ -1,0 +1,126 @@
+.register-container-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: #ff5252;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.register-container {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightgrey;
+    box-shadow: 0px 0px 15px 8px rgba(47, 47, 47, 0.301);
+    padding: 1rem;
+    border-radius: 10px;
+    position: relative;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.name-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.preferred-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 50%;
+}
+
+.field{
+    width: 100%;
+    margin: .5rem;
+}
+
+.label {
+    color: rgb(26, 26, 26);
+    font-weight: 400;
+}
+
+input {
+    font-weight: 500;
+}
+
+.input {
+    border: 1px solid rgb(116, 116, 116);
+}
+
+.email-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.password-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.dob-phone {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.account-creation-svg {
+    width: 250px;
+    height: 200px;
+    background: url(../../../../assets/SVGs/undraw_add_user_ipe3.svg) no-repeat center center / contain;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: .5rem;
+    padding: .5rem;
+}
+
+.button {
+    background: #ff5252;
+    color: white;
+    width: 45%;
+    border-radius: 5px;
+}
+
+.exit {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 30px;
+    height: 30px;
+    background-image: url(../../../../assets/SVGs/exit-icon.svg);
+    background-size: contain;
+    background-position: center;
+    cursor: pointer;
+}

@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
     isSubmitted = false;
     errorMessage: string;
     error: boolean;
-    exitted: boolean;
 
     ngOnInit(): void {
         this.loginForm = this.formBuilder.group({
@@ -48,6 +47,10 @@ export class LoginComponent implements OnInit {
 
     get formControls() {
         return this.loginForm.controls;
+    }
+
+    exitLogin() {
+        this.authService.loginSelected.next(false);
     }
 
 }

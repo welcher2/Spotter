@@ -4,6 +4,7 @@ import { User } from 'src/app/Shared/user.model';
 import { faUser, faUserCircle } from '@fortawesome/free-regular-svg-icons';
 import { faStar, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -19,6 +20,8 @@ export class HeaderComponent implements OnInit {
     faStar = faStar;
     faAngleDown = faAngleDown;
     dropdownSelected = false;
+    
+
     constructor(public auth: AngularFireAuth, public authService: AuthService) { }
 
     ngOnInit(): void {
@@ -35,6 +38,10 @@ export class HeaderComponent implements OnInit {
     logout() {
         this.authService.logout();
         this.dropdownSelected = false;
+    }
+
+    selectLogin() {
+        this.authService.loginSelected.next(true);
     }
 
 }

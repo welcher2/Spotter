@@ -37,7 +37,7 @@
                     <a class="navbar-link-guest">How to host</a>
                 </div>
                 <div class="navbar-link-container">
-                    <a class="navbar-link-guest" routerLink="/login">
+                    <a class="navbar-link-guest" (click)="selectLogin()">
                         <span class="icon">
                             <fa-icon [icon]="faUser" [styles]="{'color': '#fefefe', 'cursor': 'pointer'}"></fa-icon>
                         </span>Log in</a>

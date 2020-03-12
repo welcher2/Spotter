@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { User } from '../Shared/user.model';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 
 
@@ -13,6 +14,8 @@ export class AuthService {
 
     user: User = null;
     errorMessage: string = null;
+    loginSelected = new Subject<boolean>();
+
 
     constructor(public afAuth: AngularFireAuth, public router: Router) {
         this.afAuth.authState.subscribe(user => {
