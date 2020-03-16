@@ -15,8 +15,6 @@ import { SpotterSearchComponent } from './components/container/home/spotter/spot
 import { LoginComponent } from './components/auth/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RegisterComponent } from './components/auth/register/register.component';
-import { MaskDirective } from './Shared/mask/mask.directive';
-import { DobDirective } from './Shared/mask/dob.directive';
 
 @NgModule({
   declarations: [
@@ -30,9 +28,7 @@ import { DobDirective } from './Shared/mask/dob.directive';
     SpotterListComponent,
     LoginComponent,
     HeaderComponent,
-    RegisterComponent,
-    MaskDirective,
-    DobDirective
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

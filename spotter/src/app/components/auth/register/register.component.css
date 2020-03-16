@@ -3,12 +3,11 @@
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    padding-top: 4rem;
     background: rgba(255, 255, 255);
     z-index: 10000;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 h1 {
@@ -23,8 +22,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid lightgrey;
-    box-shadow: 0px 0px 15px 8px rgba(47, 47, 47, 0.301);
+    box-shadow: 0px 0px 15px 8px rgba(156, 156, 156, 0.404);
     padding: 1rem;
     border-radius: 10px;
     position: relative;
@@ -102,4 +100,36 @@ input {
     background-size: contain;
     background-position: center;
     cursor: pointer;
+}
+
+.invalid-required {
+    border: 1px solid red;
+}
+
+.valid-required {
+    border: 1px solid rgb(116, 116, 116);
+}
+
+.required {
+    margin: .25rem;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .register-container-overlay {
+        align-items: flex-end;
+        padding: 0;
+    }
+    .register-container {
+        border-radius: 0px;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .field {
+        width: 100%;
+    }
 }

@@ -1,123 +1,91 @@
-import { Directive, ElementRef, Renderer2, HostListener } from '@angular/core';
+import { Directive, ElementRef, Renderer2, OnDestroy, OnInit, Input } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Directive({
-  selector: '[appDob]'
+    selector: '[dob-mask]'
 })
-export class DobDirective {
+export class DobDirective implements OnDestroy, OnInit {
+    private _dobControl: AbstractControl;
+    private _preValue: string;
 
-    lastValid: string = '';
-    regex = / ([0][1-9]|[1][0-2])[\/]([0][1-9]|[1-2][0-9]|[3][0-1])[\/]([1][9][3-9][0-9]|[2][0-9][0-9][0-9])/;
-    regexM = new RegExp("[0]|[1]");
-    regexMm = new RegExp("[0][1-9]|[1][0-2]");
-    regexD = new RegExp("[0]|[1 - 2]|[3]");
-    regexDd = new RegExp(" [0][1-9]|[1-2][0-9]|[3][0-1]");
-    regexY = new RegExp("[1]|[2]");
-    regexYy = new RegExp("[1][9]|[2][0]");
-    regexYyy = new RegExp("[1][9][3-9]|[2][0][0]");
-    regexYyyy = new RegExp("[1][9][3-9][0-9]|[2][0][0][0-2]");
-
-    constructor(private el: ElementRef, private _renderer: Renderer2) { }
-
-    @HostListener('keyup', ['$event']) handleKeyUp(event: KeyboardEvent) {
-        if(this.el.nativeElement.value.length > 10) {
-            this._renderer.setProperty(this.el.nativeElement, 'value', this.el.nativeElement.value.substr(0, 10));
-            return;
-        }
-        if (event.code !== "Backspace") {
-            this.checkRegex(event);
-        }
+    @Input()
+    set dobControl(control: AbstractControl) {
+        this._dobControl = control;
+    }
+    @Input()
+    set preValue(value: string) {
+        this._preValue = value;
     }
 
-    checkRegex(event: any) {
-        var updatedVal: string = '';
-        
-        switch(this.el.nativeElement.value.length) {
-            case 1: {
-                if (this.regexM.test(this.el.nativeElement.value)) {
-                    this.lastValid = this.el.nativeElement.value;
-                    this._renderer.setProperty(this.el.nativeElement, 'value', this.el.nativeElement.value);
-                    return;
-                } else {
-                    this._renderer.setProperty(this.el.nativeElement, 'value', this.lastValid);
-                    return;
-                }
-            }
-            case 2: {
-                if (this.regexMm.test(this.el.nativeElement.value)) {
-                    updatedVal = this.el.nativeElement.value.concat('/');
-                    this.lastValid = this.el.nativeElement.value;
-                    this._renderer.setProperty(this.el.nativeElement, 'value', updatedVal);
-                    return;
-                } else {
-                    this._renderer.setProperty(this.el.nativeElement, 'value', this.lastValid);
-                    return;
-                }
-            }
-            case 4: {
-                if (this.regexD.test(this.el.nativeElement.value)) {
-                    this.lastValid = this.el.nativeElement.value;
-                    this._renderer.setProperty(this.el.nativeElement, 'value', this.el.nativeElement.value);
-                    return;
-                } else {
-                    this._renderer.setProperty(this.el.nativeElement, 'value', this.lastValid);
-                    return;
-                }
-            }
-            case 5: {
-                if (this.regexDd.test(this.el.nativeElement.value)) {
-                    updatedVal = this.el.nativeElement.value.concat('/');
-                    this.lastValid = this.el.nativeElement.value;
-                    this._renderer.setProperty(this.el.nativeElement, 'value', updatedVal);
-                    return;
-                } else {
-                    this._renderer.setProperty(this.el.nativeElement, 'value', this.lastValid);
-                    return;
-                }
-            }
-            case 7: {
-                if (this.regexY.test(this.el.nativeElement.value)) {
-                    this.lastValid = this.el.nativeElement.value;
-                    this._renderer.setProperty(this.el.nativeElement, 'value', this.el.nativeElement.value);
-                    return;
-                } else {
-                    this._renderer.setProperty(this.el.nativeElement, 'value', this.lastValid);
-                    return;
-                }
-            }
-            case 8: {
-                if (this.regexYy.test(this.el.nativeElement.value)) {
-                    this.lastValid = this.el.nativeElement.value;
-                    this._renderer.setProperty(this.el.nativeElement, 'value', this.el.nativeElement.value);
-                    return;
-                } else {
-                    this._renderer.setProperty(this.el.nativeElement, 'value', this.lastValid);
-                    return;
-                }
-            }
-            case 9: {
-                if (this.regexYyy.test(this.el.nativeElement.value)) {
-                    this.lastValid = this.el.nativeElement.value;
-                    this._renderer.setProperty(this.el.nativeElement, 'value', this.el.nativeElement.value);
-                    return;
-                } else {
-                    this._renderer.setProperty(this.el.nativeElement, 'value', this.lastValid);
-                    return;
-                }
-            }
-            case 10: {
-                if (this.regexYyyy.test(this.el.nativeElement.value)) {
-                    this.lastValid = this.el.nativeElement.value;
-                    this._renderer.setProperty(this.el.nativeElement, 'value', this.el.nativeElement.value);
-                    return;
-                } else {
-                    this._renderer.setProperty(this.el.nativeElement, 'value', this.lastValid);
-                    return;
-                }
-            }
-            default: 
-                return;
-        }
+    private sub: Subscription;
+
+    constructor(private el: ElementRef, private renderer: Renderer2) { }
+
+    ngOnInit() {
+        this.dobValidate();
     }
 
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
 
+    dobValidate() {
+
+        this.sub = this._dobControl.valueChanges.subscribe(data => {
+
+            let preInputValue: string = this._preValue;
+            var lastChar: string = preInputValue.substr(preInputValue.length - 1);
+            var newVal = data.replace(/\D/g, '');
+
+            //Get the initial starting index of the text
+            let start = this.renderer.selectRootElement('#dob').selectionStart;
+            //Get the cursor location or end of selection
+            let end = this.renderer.selectRootElement('#dob').selectionEnd;
+
+            //If a char was deleted
+            if (data.length < preInputValue.length) {
+                if (preInputValue.length < start) {
+                    if (lastChar == '/') {
+                        newVal = newVal.substr(0, newVal.length - 1);
+                    }
+                } if (newVal.length == 0) {
+                    newVal = '';
+                }
+                else if (newVal.length <= 2) {
+                    newVal = newVal.replace(/^(\d{0,2})/, '$1/');
+                } else if (newVal.length <= 5) {
+                    newVal = newVal.replace(/^(\d{0,2})(\d{0,2})/, '$1/$2/');
+                } else {
+                    newVal = newVal.replace(/^(\d{0,2})(\d{0,2})(\d{0,4})/, '$1/$2/$3');
+                }
+
+                this._dobControl.setValue(newVal, { emitEvent: false });
+                this.renderer.selectRootElement('#dob').setSelectionRange(start, end);
+            } else {
+                var removedD = data.charAt(start);
+                if (newVal.length == 0) {
+                    newVal = '';
+                }
+                else if (newVal.length <= 2) {
+                    newVal = newVal.replace(/^(\d{0,2})/, '$1/');
+                } else if (newVal.length <= 5) {
+                    newVal = newVal.replace(/^(\d{0,2})(\d{0,2})/, '$1/$2/');
+                } else {
+                    newVal = newVal.replace(/^(\d{0,2})(\d{0,2})(\d{0,4})/, '$1/$2/$3');
+                }
+                if (preInputValue.length >= start) {
+                    if (removedD == '/') {
+                        start = start + 1;
+                        end = end + 1;
+                    }
+                    this._dobControl.setValue(newVal, { emitEvent: false });
+                    this.renderer.selectRootElement('#dob').setSelectionRange(start, end);
+                } else {
+                    this._dobControl.setValue(newVal, { emitEvent: false });
+                    this.renderer.selectRootElement('#dob').setSelectionRange(start + 2, end + 2);
+                }
+            }
+        });
+    }
 }

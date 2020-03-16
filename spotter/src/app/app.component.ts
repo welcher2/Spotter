@@ -19,6 +19,7 @@ export class AppComponent implements OnDestroy, OnInit{
         this.showLogin = this.authService.loginSelected.subscribe(
             (login: boolean) => {
                 this.loginSelected = login;
+                console.log(login);
             }
         );
     }
