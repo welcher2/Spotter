@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ValidateTelephone } from '../../../Shared/telephone.validator';
+import { retry } from 'rxjs/operators';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
-import { emailMatchValidator, passwordMatchValidator } from '../../../Shared/matcher';
+import { emailMatchValidator, passwordMatchValidator, telephoneValidator } from '../../../Shared/matcher';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { AuthService } from 'src/app/services/auth.service';
 
 export class Registration {
@@ -35,7 +36,8 @@ export class RegisterComponent implements OnInit {
     faLock = faLock;
     faUser = faUser;
     errorMessage:string = null;
-    constructor(private formBuilder: FormBuilder, private afAuth: AngularFireAuth, private authService: AuthService) { }
+    invalidEmail: boolean = false;
+    constructor(private formBuilder: FormBuilder, private afAuth: AngularFireAuth, private authService: AuthService, private afDb: AngularFireDatabase) { }
 
     ngOnInit(): void {
         this.registerForm = this.formBuilder.group({
@@ -43,7 +45,7 @@ export class RegisterComponent implements OnInit {
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             dateOfBirth: ['', Validators.required],
-            phoneNumber: ['', [Validators.required, ValidateTelephone]],
+            phoneNumber: ['', [Validators.required, telephoneValidator]],
             email: ['', [Validators.required, Validators.email]],
             confirmEmail: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(6)]],
@@ -71,26 +73,46 @@ export class RegisterComponent implements OnInit {
 
     onSubmit() {
         if (this.registerForm.valid) {
-            let email = this.registerForm.get('email').value;
-            let password = this.registerForm.get('password').value;
+            var email = this.email.value;
+            var password = this.password.value;
             var promise = this.afAuth.auth.createUserWithEmailAndPassword(email, password);
             promise.then(
                 (user) => {
                     this.authService.user = user.user;
+                    var uid = user.user.uid;
+                    if (this.displayName.value) {
+                        let profile = {
+                            displayName: this.displayName.value + " " + this.lastName
+                        };
+                        user.user.updateProfile(profile).then(
+                            () => {
+                                console.log("Display name updated.");
+                            }, 
+                            retry(3)
+                        );
+                    } else {
+                        let profile = {
+                            displayName: this.firstName + " " + this.lastName
+                        };
+                        user.user.updateProfile(profile).then(
+                            () => {
+                                console.log("Display name updated.");
+                            },
+                            retry(3)
+                        );
+                    }
                 },
                 (error) => {
                     var errorCode = error.code;
-                    if (errorCode === 'auth/email-already-in-user') {
+                    if (errorCode === 'auth/email-already-in-use') {
                         this.errorMessage = "Email already in use.";
+                        this.invalidEmail = true;
                     } else {
                         console.log(errorCode);
+                        this.invalidEmail = false;
                     }
                 }
             )
         }
-    }
-
-    private userRegister() {
-
     }
 }
