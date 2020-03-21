@@ -15,6 +15,8 @@ import { SpotterSearchComponent } from './components/container/home/spotter/spot
 import { LoginComponent } from './components/auth/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,10 @@ import { RegisterComponent } from './components/auth/register/register.component
     SharedModule,
     FirebaseModule,
   ],
-  providers: [],
+  providers: [ 
+    AngularFireAuth,
+    AngularFireDatabase
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

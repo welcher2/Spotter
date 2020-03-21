@@ -90,7 +90,7 @@
                             <span class="icon is-small is-left">
                                 <fa-icon [icon]="faLock"></fa-icon>
                             </span>
-                            <div *ngIf='password.errors.minlength && registerForm.submitted'
+                            <div *ngIf='password.errors?.minlength && ngForm.submitted'
                                 class="alert alert-danger">
                                 Password must contain six characters.
                             </div>
