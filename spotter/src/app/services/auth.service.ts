@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
-import { User } from '../Shared/user.model';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
@@ -12,7 +11,7 @@ import { Subject } from 'rxjs';
 })
 export class AuthService {
 
-    user: User = null;
+    user: firebase.User = null;
     errorMessage: string = null;
     loginSelected = new Subject<boolean>();
 

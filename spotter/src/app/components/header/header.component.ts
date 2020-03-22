@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { User } from 'src/app/Shared/user.model';
 import { faUser, faUserCircle } from '@fortawesome/free-regular-svg-icons';
 import { faStar, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,7 +13,7 @@ import { Subject } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
     faUser = faUser;
-    user: User = null;
+    user: firebase.User = null;
     loggedIn: boolean = false;
     faUserCircle = faUserCircle;
     faStar = faStar;

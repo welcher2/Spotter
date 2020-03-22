@@ -1,29 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { retry } from 'rxjs/operators';
-import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faLock, faUser, faSleigh } from '@fortawesome/free-solid-svg-icons';
 import { emailMatchValidator, passwordMatchValidator, telephoneValidator } from '../../../Shared/matcher';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserInfo } from 'src/app/Shared/Models/userinfo.model';
 
-export class Registration {
-    public displayName: string;
-    public email: string;
-    public phoneNumber: string;
-    public providerId: string;
-    public Uid:string;
-    public emailVerified:boolean;
-
-    constructor(public _displayName: string, public _email: string, public _phoneNumber: string, public _photoUrl?:string, 
-        public _providerId?:string, public _Uid?:string, public _emailVerified?:boolean) 
-        {
-            this.Uid = _Uid;
-            this.displayName = _displayName;
-            this.email = _email;
-            this.phoneNumber = _phoneNumber;
-        }
-}
 
 @Component({
   selector: 'app-register',
@@ -71,48 +55,100 @@ export class RegisterComponent implements OnInit {
     
     get confirmPassword() { return this.registerForm.get('confirmPassword'); }
 
+
     onSubmit() {
         if (this.registerForm.valid) {
-            var email = this.email.value;
-            var password = this.password.value;
-            var promise = this.afAuth.auth.createUserWithEmailAndPassword(email, password);
-            promise.then(
-                (user) => {
-                    this.authService.user = user.user;
-                    var uid = user.user.uid;
-                    if (this.displayName.value) {
-                        let profile = {
-                            displayName: this.displayName.value + " " + this.lastName
-                        };
-                        user.user.updateProfile(profile).then(
-                            () => {
-                                console.log("Display name updated.");
-                            }, 
-                            retry(3)
-                        );
-                    } else {
-                        let profile = {
-                            displayName: this.firstName + " " + this.lastName
-                        };
-                        user.user.updateProfile(profile).then(
-                            () => {
-                                console.log("Display name updated.");
-                            },
-                            retry(3)
-                        );
-                    }
-                },
-                (error) => {
-                    var errorCode = error.code;
-                    if (errorCode === 'auth/email-already-in-use') {
-                        this.errorMessage = "Email already in use.";
-                        this.invalidEmail = true;
-                    } else {
-                        console.log(errorCode);
-                        this.invalidEmail = false;
-                    }
-                }
-            )
+            this.handleSignUp();
+            if(this.authService.user) {
+                // Navigate to phone verification
+                this.commitUserToDB();
+            }
         }
+        return;
+    }
+
+
+    private handleSignUp(): void {
+        var email = this.email.value;
+        var password = this.password.value;
+        var promise = this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+        promise.then(
+            (user) => {
+                this.authService.user = user.user;
+                if (this.displayName.value) {
+                    let displayNameValue: string = this.displayName.value;
+
+                    //Check if two names were entered
+                    let twoWords: boolean = displayNameValue.indexOf(' ') == -1 ? false : true;
+
+                    //Trim to first word if two names were entered
+                    if (twoWords) {
+                        displayNameValue = displayNameValue.substr(0, displayNameValue.indexOf(' ') + 1);
+                    }
+                    
+                    let profile = {
+                        displayName: this.displayName.value + " " + this.lastName.value
+                    };
+                    //Update the user profile displayName on firebase
+                    user.user.updateProfile(profile).then(
+                        () => {
+                            console.log("Display name updated: " + profile.displayName);
+                        }, 
+                        //Retry updating the user display name if the intial call fails, do this 3 times before quitting
+                        retry(3)
+                    );
+                } else {
+                    let profile = {
+                        displayName: this.firstName + " " + this.lastName
+                    };
+                    user.user.updateProfile(profile).then(
+                        () => {
+                            console.log("Display name updated.");
+                        },
+                        retry(3)
+                    );
+                }
+
+            },
+            (error) => {
+                var errorCode = error.code;
+                if (errorCode === 'auth/email-already-in-use') {
+                    this.errorMessage = "Email already in use.";
+                    this.invalidEmail = true;
+                } else {
+                    console.log(errorCode);
+                    this.invalidEmail = false;
+                }
+            }
+        )
+    }
+
+    private commitUserToDB() {
+        let userInfo: UserInfo = new UserInfo(
+            this.firstName.value + ' ' + this.lastName.value, 
+            this.email.value, 
+            this.stripPhoneNumber(this.phoneNumber.value),
+            this.dateOfBirth.value
+        );
+        let uid = this.authService.user.uid;
+        const userRef = this.afDb.object('users/' + uid);
+        userRef.set({
+            name: userInfo.name,
+            email: userInfo.email,
+            phone: userInfo.phone,
+            dob: userInfo.dob, 
+            vehicle: false,
+            address: false,
+            emailVerified: false,
+            phoneVerified: false
+        });
+        
+
+    }
+
+    stripPhoneNumber(phoneNumber: string): string {
+        let newPhoneNumber: string = '';
+        newPhoneNumber += '+1' + phoneNumber.substr(1, 3) + phoneNumber.substr(6, 3) + phoneNumber.substr(10, 4);
+        return newPhoneNumber;
     }
 }
